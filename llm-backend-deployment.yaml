@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-backend
+  labels:
+    app: llm-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm-backend
+  template:
+    metadata:
+      labels:
+        app: llm-backend
+    spec:
+      containers:
+        - name: ollama
+          image: ollama/ollama:latest
+          ports:
+            - containerPort: 11434
+          command: ["/bin/sh", "-c"]
+          args: ["ollama serve & sleep 5 && ollama pull smollm2 && wait"]
+          resources:
+            requests:
+              memory: "2Gi"
+              cpu: "1000m"
