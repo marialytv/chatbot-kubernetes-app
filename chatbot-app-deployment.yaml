@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: streamlit-app
+  name: chatbot-app
   labels:
-    app: streamlit-app
+    app: chatbot-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: streamlit-app
+      app: chatbot-app
   template:
     metadata:
       labels:
-        app: streamlit-app
+        app: chatbot-app
     spec:
       containers:
-        - name: streamlit
+        - name: chatbot
           image: marlyt/chatbot-app:v1
           ports:
             - containerPort: 8501
